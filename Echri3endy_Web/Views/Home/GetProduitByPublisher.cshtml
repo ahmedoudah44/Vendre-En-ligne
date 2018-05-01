@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Echri3endy_Web.Models.ProduitViewModel>
+@{
+    ViewBag.Title = "GetProduitByPublisher";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@foreach (var gr in Model)
+{
+   <h3>@gr.ProduitTitele</h3> 
+<table class="table table-bordered table-hover">
+
+    <tr>
+        <th>
+            Nom Publisher
+        </th>
+        <th>
+            Message
+        </th>
+        <th>
+            Date de Envoiez
+        </th>
+    </tr>
+       @foreach (var item in gr.Items)
+       {
+        <tr>
+            <th>
+                @item.user.UserName
+            </th>
+            <th>
+                @item.Messager
+            </th>
+            <th>
+                @item.DemandeVnDate
+            </th>
+        </tr>
+       }
+
+</table>
+}

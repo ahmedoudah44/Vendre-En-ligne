@@ -1,0 +1,52 @@
+﻿@model Echri3endy_Web.Models.Produit
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.category.categoryNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category.categoryNom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProduitTiter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProduitTiter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProduitConteni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProduitConteni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProduitImager)
+        </dt>
+
+        <dd>
+            <img src="~/Uploads/@Html.DisplayFor(model => model.ProduitImager)"
+                  class="thumbnail" style="max-width:128px; height:128px;" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Demande Le Produit", "Demande", new { id = Model.Id },new { @class="btn btn-success"}) |
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-default" })
+</p>

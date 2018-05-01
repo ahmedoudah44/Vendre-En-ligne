@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Echri3endy_Web.Models.VenderPourProduit>
+@{
+    ViewBag.Title = "GetProduitByUser";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+
+    <h4>Toute le produit quie Vous Demmande</h4>
+ <table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.produit.ProduitTiter)
+    </th>
+        <th>@Html.DisplayNameFor(model => model.Messager)</th>
+        
+    
+
+    <th>@Html.DisplayNameFor(model=> model.DemandeVnDate)</th>
+</tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.produit.ProduitTiter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.Messager)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem=>item.DemandeVnDate)
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+
+

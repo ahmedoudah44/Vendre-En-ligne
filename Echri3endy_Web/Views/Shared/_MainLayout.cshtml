@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1 " />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body class="Body">
+    <!-- navebar ---> 
+    <nav class="navbar navbar-default navbar_fixed_top">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+                
+               
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ><a href="/Home/Index" class="navbar-brand">
+                        <i class="glyphicon glyphicon-home">
+                        </i> 
+                         Home
+                        </a>
+                    
+                    </li>
+                    
+                    <li><a href="/Home/About" class="navbar-brand"><i class="glyphicon glyphicon-info-sign"></i> A propos de notre site</a></li>
+                    <li><a href="/Home/Contact" class="navbar-brand"><i class="glyphicon glyphicon-envelope"></i> Contacter</a></li>
+               
+                    <li> 
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post)) {
+                            <input text="text" name="searchName" id="searchName" 
+                                   placeholder="Rechercher Ici.." />
+                        }
+                       
+                    </li>
+                 </ul>
+                     <!--Parchal login-->
+                @Html.Partial("_Login")
+                 
+            </div>
+
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row" style="min-height:550px;">
+            @RenderBody()
+        </div>
+    </div>
+    <!--footer-->
+    <footer class="myfooter">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-md-4">
+                    <h3>
+                        <i class="glyphicon glyphicon-question-sign"></i>
+                    Notre but    
+                    </h3>
+                    <p>
+                        ce site permet d'offrire a leurs clients des appels d'offres
+                        soit en publiant votre produit ou des achats en ligne        
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        <i class="glyphicon glyphicon-globe"></i>
+                        lien 
+                    </h3>
+                   <ul>
+                       <li><a href="#">FACBOOK</a></li>
+                       <li><a href="#">EMAIL</a></li> 
+                   </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                       <i class="glyphicon glyphicon-envelope"></i> Contacter
+                    </h3>
+                    <ul>
+                        <li><a href="#">FACBOOK</a></li>
+                        <li><a href="#">INSTAGRAM</a></li>
+                        <li><a href="#">EMAIL</a></li>
+                    </ul>
+                </div>
+            </div>
+          
+        </div>
+        <div class="subfooter">
+            <span>جميع الحقوق محفوظة لموقع المبيعات 2017 </span>
+        </div>
+    </footer>
+
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    @RenderSection("scripts",required:false)
+
+     
+</body>
+</html>

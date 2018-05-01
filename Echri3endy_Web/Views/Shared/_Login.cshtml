@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebApplication1.Models;
+
+@if (Request.IsAuthenticated)
+            {
+                var db = new ApplicationDbContext();
+                var UserID = User.Identity.GetUserId();
+                var CrrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+                
+
+
+
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+                {
+                    //csrs
+                    @Html.AntiForgeryToken()
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="# " class="dropdown-toggle" data-toggle="dropdown">
+                                <samp class="glyphicon glyphicon-user"></samp>
+                                <strong >Bienvenue : @CrrentUser.UserName</strong>
+                                <samp class="glyphicon glyphicon-chevron-down"></samp>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="navbar-user">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <p class="text-center">
+                                                    <samp class="glyphicon glyphicon-user img-size"></samp>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <p class="text-right">
+                                                    <strong>
+                                                        @CrrentUser.UserName
+                                                    </strong>
+                                                    @if(CrrentUser.UserType == "userPublic")
+                                                {
+                                                        <a href="~/Home/GetProduitByPublisher" class="btn btn-success btn-block">Votre Publication</a>
+                                                        <a href="~/Produits/Create"  class="btn btn-success btn-block">Ajoute une Publication</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="~/Home/GetProduitByUser" class="btn btn-success btn-block">Votre Demande</a>
+                                                }
+                                                    <a href="~/Account/EditProfile" class="btn btn-primary btn-block">Edit Profiles</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                         </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p>
+                                                    <a href="javascript:document.getElementById('logoff').submit()" class="btn btn-danger btn-block"> Deconecte</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+            @*<li>
+                @Html.ActionLink("Bienvenue " +User.Identity.GetUserName(),"Index","Manage")
+            </li>
+             <li>
+                
+             </li>*@
+        </ul>
+    }
+}
+else{
+<ul class="nav navbar-nav navbar-right">
+
+    <li><a href="~/Account/Register" class="navbar-brand"><i class="glyphicon glyphicon-user"></i> Sign Up</a></li>
+    <li><a href="~/Account/Login" class="navbar-brand"><i class="glyphicon glyphicon-lock"></i> Login </a></li>
+</ul>
+ }

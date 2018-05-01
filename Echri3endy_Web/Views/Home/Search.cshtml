@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Echri3endy_Web.Models.Produit>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+    <div class="panel panel_default" style="padding:15px">
+        <h1>Resulta de Rechacher</h1>
+        
+        <div class="row">
+            @foreach (var subItem in Model)
+            {
+
+                <div class="col-md-3 thumbnail" style="margin-left:20px; margin-bottom:30px; height:390px;">
+                    <img src="~/Uploads/@subItem.ProduitImager" />
+                    <h3>@Html.DisplayFor(ModelItem => subItem.ProduitTiter) </h3>
+                    <h5>@Html.DisplayFor(ModelItem => subItem.ProduitConteni) </h5>
+                    @Html.ActionLink("Detail", "Details", new { ProduitId = subItem.Id }, new { @class = "btn btn-primary" })
+                </div>
+            }
+        </div>
+    </div>
+
+  

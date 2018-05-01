@@ -1,0 +1,107 @@
+﻿@model Echri3endy_Web.Models.Produit
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Create un produi</h2>
+
+@using (Html.BeginForm("Create","Produits",FormMethod.Post ,new { enctype ="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="alert alert-danger" id="error-div" style="display:none">
+
+        <span id="view-err">
+
+        </span>
+
+    </div>
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProduitTiter, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProduitTiter, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProduitTiter, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    
+        <div class="form-group">
+            @Html.LabelFor(model => model.prix, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.prix, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.prix, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProduitConteni, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProduitConteni, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProduitConteni, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProduitImager, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="upload" id="produitImage" />
+                @Html.ValidationMessageFor(model => model.ProduitImager, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryId, "Type Produit", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" id="save" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts{
+ <script>
+    
+    $(function () {
+        $("#save").click(function () {
+
+            if ($("#produitImage").val() == "") {
+                $("#error-div").fadeIn();
+                $("#view-err").append(" entez Image");
+                return false;
+            }
+                var filename =document.getElementById("produitImage").value;
+                var extensionImg = filename.substr(filename.lastIndexOf('.') + 1);
+                var validExtensions = ['jpg', 'png', 'gif', 'bmp'];
+                if ($.inArray(extensionImg, validExtensions) == -1) {
+                    $("#error-div").fadeIn();
+                    $("#view-err").append("entez path valide pour Image");
+                    return false;
+                }
+                var myFileSize = document.getElementById("produitImage").files[0].size / 1024 / 1024;
+                if (myFileSize > 2) {
+                    $("#error-div").fadeIn();
+                    $("#view-err").append("entez Image inferire de 2MB");
+                    return false;
+                }
+            
+        });
+    });
+</script>
+}
